@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
+//Class for drawing GUI
 public class gui extends JFrame {
 
     ThPlay pl;
@@ -9,23 +11,26 @@ public class gui extends JFrame {
     private JButton b2 = new JButton("stop");
     private JButton b3 = new JButton("play");
     private JButton b5 = new JButton("next");
-    int track = 0; //default
-    boolean stop = false;
+    int track = 0; //number of song
+    boolean stop = false; //Button "Stop" was/wasn't pressed
 
     public gui(){
        super("MP3 Player");
        setLayout(new GridLayout(1,5,5,5));
+        //Adding the buttons
        add(b1);
        add(b2);
        add(b3);
        add(b5);
-       b1.setEnabled(false);
+       b1.setEnabled(false); //Cause we don't have previous song
 
+       //creating buttons
        Buttons1 but1 = new Buttons1();
        Buttons2 but2 = new Buttons2();
        Buttons3 but3 = new Buttons3();
        Buttons5 but5 = new Buttons5();
 
+       //Adding actionlisteners
        b1.addActionListener(but1);
        b2.addActionListener(but2);
        b3.addActionListener(but3);
@@ -73,6 +78,7 @@ public class gui extends JFrame {
         }
     }
 
+    //To shorten the code
     private void CheckButtons(){
         if(track==0){
             b1.setEnabled(false);
@@ -84,6 +90,7 @@ public class gui extends JFrame {
             b5.setEnabled(true);}
     }
 
+    //To shorten the code
     private void StartTrack(){
         pl = new ThPlay();
         pl.setFile(track);
@@ -91,9 +98,10 @@ public class gui extends JFrame {
         stop = false;
     }
 
+    //To shorten the code
     private void CheckStop(){
-        if(!stop){
-            pl.interrupt();
+        if(!stop){ //The button "Stop" was not press
+            pl.interrupt(); //Checking if thread is interrupted
             pl.Stop();
         }
     }
